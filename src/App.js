@@ -90,30 +90,30 @@ function Stats() {
   );
 }
 
-// function TestForm() {
-//   const [testValue, setValue] = useState("");
-//   const [testNumber, setNumber] = useState(1);
+function TestForm() {
+  const [testValue, setValue] = useState("");
+  const [testNumber, setNumber] = useState(1);
 
-//   function handleTestSubmit(e) {
-//     e.preventDefault();
-//     console.log(testNumber + " " + testValue);
-//     setValue("");
-//     setNumber(1);
-//   }
+  function handleTestSubmit(e) {
+    e.preventDefault();
+    console.log(testNumber + " " + testValue);
+    setValue("");
+    setNumber(1);
+  }
 
-//   return (
-//     <form onSubmit={handleTestSubmit}>
-//       <input
-//         type="text"
-//         placeholder="new Task..."
-//         onChange={(e) => setValue(e.target.value)}
-//       ></input>
-//       <select onChange={(e) => setNumber(e.target.value)}>
-//         <option value={1}>1</option>
-//         <option value={2}>2</option>
-//         <option value={3}>3</option>
-//       </select>
-//       <button>Submit</button>
-//     </form>
-//   );
-// }
+  return (
+    <form onSubmit={handleTestSubmit}>
+      <input
+        type="text"
+        placeholder="new Task..."
+        onChange={(e) => setValue(e.target.value)}
+      ></input>
+      <select onChange={(e) => setNumber(e.target.value)}>
+        <option value={1}>1</option>
+        <option value={2}>2</option>
+        <option value={3}>3</option>
+      </select>
+      <button>Submit</button>
+    </form>
+  );
+}
