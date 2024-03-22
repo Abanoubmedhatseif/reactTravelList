@@ -7,15 +7,27 @@ export default function App() {
     setItems([...items, newItem]);
   }
 
-  function handleDelete(itemToDelete) {
-    setItems(items.filter((item) => item !== itemToDelete));
+  function handleDelete(id) {
+    setItems(items.filter((item) => item.id !== id));
+  }
+
+  function handleToggle(id) {
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
   }
 
   return (
     <div className="app">
       <Logo />
       <Form handleAddItems={handleAddItems} />
-      <Todolist items={items} handleDelete={handleDelete} />
+      <Todolist
+        items={items}
+        handleDelete={handleDelete}
+        handleToggle={handleToggle}
+      />
       <Stats />
     </div>
   );
@@ -62,25 +74,36 @@ function Form({ handleAddItems }) {
     </form>
   );
 }
-function Todolist({ items, handleDelete }) {
+
+function Todolist({ items, handleDelete, handleToggle }) {
   return (
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item item={item} key={item.id} handleDelete={handleDelete} />
+          <Item
+            item={item}
+            key={item.id}
+            handleDelete={handleDelete}
+            handleToggle={handleToggle}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item, handleDelete }) {
+function Item({ item, handleDelete, handleToggle }) {
   return (
     <li>
-      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+      <input
+        type="checkbox"
+        value={item.checked}
+        onChange={() => handleToggle(item.id)}
+      ></input>
+      <span style={item.checked ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.item}
       </span>
-      <button onClick={() => handleDelete(item)}>❌</button>
+      <button onClick={() => handleDelete(item.id)}>❌</button>
     </li>
   );
 }
