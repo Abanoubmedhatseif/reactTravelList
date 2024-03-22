@@ -28,7 +28,7 @@ export default function App() {
         handleDelete={handleDelete}
         handleToggle={handleToggle}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
@@ -108,10 +108,27 @@ function Item({ item, handleDelete, handleToggle }) {
   );
 }
 
-function Stats() {
+function Stats({ items }) {
+  if (!items.length) {
+    return (
+      <div className="stats">
+        <em>Start Adding to your List ✈️</em>
+      </div>
+    );
+  }
+
+  const numberOfItems = items.length;
+  const packedItems = items.filter((item) => item.checked).length;
+  const precentagePacked = Math.round((packedItems / numberOfItems) * 100);
+
   return (
     <footer className="stats">
-      <em>You have X elements in your list (X%)</em>
+      <em>
+        {precentagePacked === 100
+          ? "You've got everything, we are good to go （￣︶￣）↗　"
+          : `You have ${numberOfItems} elements in your list, and you already packed
+        ${packedItems} items (${precentagePacked}%)`}
+      </em>
     </footer>
   );
 }
