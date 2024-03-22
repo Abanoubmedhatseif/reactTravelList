@@ -63,9 +63,6 @@ function Form({ handleAddItems }) {
         placeholder="New item..."
         value={item}
         onChange={(e) => setitem(e.target.value)}
-        placeholder="New item..."
-        value={item}
-        onChange={(e) => setitem(e.target.value)}
       ></input>
       <button>Add</button>
     </form>
